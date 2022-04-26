@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>inShare - Easy file sharing</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <section class="upload-container">
         <div class="drop-zone">
@@ -15,19 +17,19 @@
                 <img src="./file.svg" alt="file icon" class="left" draggable="false">
                 <img src="./file.svg" alt="file icon" class="right" draggable="false">
             </div>
-            <input type="file" id="fileInput">
+            <input type="file" id="fileinput">
             <div class="title">
-                Drop your Files here or, 
+                Drop your Files here or,
                 <span class="browseBtn">browse</span>
             </div>
         </div>
         <div class="progress-container">
             <div class="bg-progress"></div>
-                <div class="inner-container">
-                    <div class="title">Uploading...</div>
-                    <div class="percent-container"><span id="percent">0</span>%</div>
-                    <div class="progress-bar"></div>
-                </div>
+            <div class="inner-container">
+                <div class="title">Uploading...</div>
+                <div class="percent-container"><span id="percent">0</span>%</div>
+                <div class="progress-bar"></div>
+            </div>
         </div>
         <div class="sharing-container">
             <p class="expire">Link expires in 24 hrs</p>
@@ -39,7 +41,7 @@
             <div class="email-container">
                 <form id="emailForm">
                     <div class="field">
-                        <label for="">Your E-mail  :</label>
+                        <label for="">Your E-mail :</label>
                         <input type="email" required name="from-email" id="sender">
                     </div>
                     <div class="field">
@@ -57,4 +59,5 @@
     <script src="index.js"></script>
 
 </body>
+
 </html>

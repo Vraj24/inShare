@@ -1,6 +1,6 @@
 const dropZone = document.querySelector(".drop-zone");
 const browseBtn = document.querySelector(".browseBtn");
-const fileInput = document.querySelector("#fileInput");
+const fileInput = document.querySelector("#fileinput");
 
 const progressContainer = document.querySelector(".progress-container");
 const bgProgress = document.querySelector(".bg-progress");
@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const host = "http://localhost:3000";
+const host = "https://inshare-d6y.pages.dev//";
 const uploadURL = `${host}api/files`;
 const emailURL = `${host}api/files/send`;
 
@@ -24,7 +24,7 @@ const maxAllowedSize = 100 * 1024 * 1024;
 dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
 
-    if (dropZone.classList.contains("dragged")) {
+    if (!dropZone.classList.contains("dragged")) {
         dropZone.classList.add("dragged");
     }
 });
@@ -59,30 +59,27 @@ copyBtn.addEventListener("click", () => {
 });
 
 const uploadFile = () => {
-    
-    if(fileInput.files.length > 1)
-    {
+
+    if (fileInput.files.length > 1) {
         resetFileInput();
         showToast("Only upload one file !");
-        return ;
+        return;
     }
-    const files = fileInput.files[0];
-    if(files.size > maxAllowedSize)
-    {
+    if (files.size > maxAllowedSize) {
         showToast("Can't upload more then 100MB");
         resetFileInput();
-        return ;
+        return;
     }
-
-    progressContainer.style.display = "block";
     
+    progressContainer.style.display = "block";
+    const files = fileInput.files[0];
+
     const formData = new FormData();
     formData.append("myFile", files);
 
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) 
-        {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log(xhr.response);
             onUploadSucess(JSON.parse(xhr.response));
         }
@@ -142,14 +139,13 @@ emailForm.addEventListener("submit", (e) => {
         },
         body: JSON.stringify(formData)
     })
-    .then((res) => res.json())
-    .then((data) => {
-        if(sucess)
-        {
-            sharingContainer.style.display = "none";
-            showToast("E-mail Sent");
-        }
-    });
+        .then((res) => res.json())
+        .then((data) => {
+            if (sucess) {
+                sharingContainer.style.display = "none";
+                showToast("E-mail Sent");
+            }
+        });
 });
 
 let toastTimer;
@@ -161,5 +157,5 @@ const showToast = (msg) => {
     toastTimer = setTimeout(() => {
         toast.style.transform = "translate(-50%, 60px)";
 
-    },2000);
+    }, 2000);
 };
