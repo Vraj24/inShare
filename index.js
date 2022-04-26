@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const host = "https://inshare-d6y.pages.dev/";
+const host = "http://localhost:3000";
 const uploadURL = `${host}api/files`;
 const emailURL = `${host}api/files/send`;
 

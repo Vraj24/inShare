@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 require('dotenv');
 
-const PORT = process.env.SMTP_PORT;
+const PORT = process.env.SMTP_PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
