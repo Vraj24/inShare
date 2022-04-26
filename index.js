@@ -8,7 +8,7 @@ const progressBar = document.querySelector(".progress-bar");
 const percentDiv = document.querySelector("#percent");
 
 const sharingContainer = document.querySelector(".sharing-container");
-const fileURLInput = document.querySelector("#fileURL");
+const fileURL = document.querySelector("#fileURL");
 const copyBtn = document.querySelector("#copyBtn");
 
 const emailForm = document.querySelector("#emailForm");
@@ -53,13 +53,14 @@ browseBtn.addEventListener("click", () => {
 });
 
 copyBtn.addEventListener("click", () => {
-    fileURLInput.select();
+    fileURL.select();
     document.execCommand("copy");
     showToast("Link Copied");
 });
 
 const uploadFile = () => {
 
+    const files = fileInput.files[0];
     if (fileInput.files.length > 1) {
         resetFileInput();
         showToast("Only upload one file !");
@@ -72,7 +73,6 @@ const uploadFile = () => {
     }
     
     progressContainer.style.display = "block";
-    const files = fileInput.files[0];
 
     const formData = new FormData();
     formData.append("myFile", files);
@@ -104,14 +104,14 @@ const updateProgress = (e) => {
     progressBar.style.transform = `scaleX(${percent / 100})`;
 };
 
-const onUploadSucess = ({ file: url }) => {
+const onUploadSuccess = ({ file: url }) => {
     console.log(url);
     resetFileInput();
     emailForm[2].removeAttribute("disabled", "true");
     progressContainer.style.display = "none";
     sharingContainer.style.display = "block";
 
-    fileURLInput.value = url;
+    fileURL.value = url;
 };
 
 const resetFileInput = () => {
@@ -121,7 +121,7 @@ const resetFileInput = () => {
 emailForm.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log("Submit form");
-    const url = fileURLInput.value;
+    const url = fileURL.value;
 
     const formData = {
         uuid: url.split("/").splice(-1, 1)[0],
